@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Enter Code</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            function validate()
+            {
+                
+               var x = document.getElementById("code");
+                if (x=1234)
+                {
+                        
+                        alert("Succesful");
+
+                        var url = new URL("http://localhost/doctor/part_form.html");
+                        url.searchParams.append('MRCode', x);
+
+                        alert(url)
+
+
+                        document.getElementById("url").style.display = '';
+                        document.getElementById("url-link").innerHTML +=url;
+
+                     
+
+
+
+                        var copyText = document.getElementById("myInput");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999);
+                        navigator.clipboard.writeText(copyText.value);
+
+                }
+                else{
+                    alert("Enter Correct Code")
+                }
+            }
+            function CopyToClipboard()
+            {
+                var r = document.createRange();
+                r.selectNode(document.getElementById("url-link"));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(r);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                document.getElementById("url-link").innerHTML +=  " <br>  Copied";
+            }
+        </script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Company Name</h1>
+            <p>MR Code*</p> 
+            <input type="text" placeholder="Enter MR code" id="code">
+            <button class="btn btn-success" onclick="validate()">Generate Link</button>
+        </div>
+        <div class="text-center" id="url" style=display:none>
+            
+            
+
+            <p id="url-link"></p>
+            
+            <button type="submit" class="btn btn-primary" onclick="CopyToClipboard()"> Copy Link </button>
+        </div>
+    </body>
+</html>
